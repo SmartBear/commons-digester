@@ -202,8 +202,8 @@ public class ObjectCreateRule extends Rule {
             }
         }
         if (digester.log.isDebugEnabled()) {
-            digester.log.debug("[ObjectCreateRule]{" + digester.match +
-                    "}New " + realClassName);
+            digester.log.debug("[ObjectCreateRule]{" + StringUtils.escapeString(digester.match) +
+                    "}New " + StringUtils.escapeString(realClassName));
         }
 
         // Instantiate the new object and push it on the context stack
@@ -222,7 +222,7 @@ public class ObjectCreateRule extends Rule {
 
         Object top = digester.pop();
         if (digester.log.isDebugEnabled()) {
-            digester.log.debug("[ObjectCreateRule]{" + digester.match +
+            digester.log.debug("[ObjectCreateRule]{" + StringUtils.escapeString(digester.match) +
                     "} Pop " + top.getClass().getName());
         }
 

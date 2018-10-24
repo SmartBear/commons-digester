@@ -184,13 +184,15 @@ public class SetRootRule extends Rule {
         Object parent = digester.root;
         if (digester.log.isDebugEnabled()) {
             if (parent == null) {
-                digester.log.debug("[SetRootRule]{" + digester.match +
+                digester.log.debug("[SetRootRule]{" + StringUtils.escapeString(digester.match) +
                         "} Call [NULL ROOT]." +
-                        methodName + "(" + child + ")");
+                        StringUtils.escapeString(methodName) + "(" +
+                        StringUtils.escapeString(child.toString()) + ")");
             } else {
-                digester.log.debug("[SetRootRule]{" + digester.match +
+                digester.log.debug("[SetRootRule]{" + StringUtils.escapeString(digester.match) +
                         "} Call " + parent.getClass().getName() + "." +
-                        methodName + "(" + child + ")");
+                        StringUtils.escapeString(methodName) + "(" +
+                        StringUtils.escapeString(child.toString()) + ")");
             }
         }
 

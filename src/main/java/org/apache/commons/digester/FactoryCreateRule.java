@@ -374,7 +374,8 @@ public class FactoryCreateRule extends Rule {
                 Object instance = getFactory(attributes).createObject(attributes);
                 
                 if (digester.log.isDebugEnabled()) {
-                    digester.log.debug("[FactoryCreateRule]{" + digester.match +
+                    digester.log.debug("[FactoryCreateRule]{" +
+                            StringUtils.escapeString(digester.match) +
                             "} New " + (instance == null ? "null object" :
                             instance.getClass().getName()));
                 }
@@ -397,7 +398,7 @@ public class FactoryCreateRule extends Rule {
             Object instance = getFactory(attributes).createObject(attributes);
             
             if (digester.log.isDebugEnabled()) {
-                digester.log.debug("[FactoryCreateRule]{" + digester.match +
+                digester.log.debug("[FactoryCreateRule]{" + StringUtils.escapeString(digester.match) +
                         "} New " + (instance == null ? "null object" :
                         instance.getClass().getName()));
             }
@@ -431,7 +432,7 @@ public class FactoryCreateRule extends Rule {
 
         Object top = digester.pop();
         if (digester.log.isDebugEnabled()) {
-            digester.log.debug("[FactoryCreateRule]{" + digester.match +
+            digester.log.debug("[FactoryCreateRule]{" + StringUtils.escapeString(digester.match) +
                     "} Pop " + top.getClass().getName());
         }
 
@@ -495,8 +496,8 @@ public class FactoryCreateRule extends Rule {
                 }
             }
             if (digester.log.isDebugEnabled()) {
-                digester.log.debug("[FactoryCreateRule]{" + digester.match +
-                        "} New factory " + realClassName);
+                digester.log.debug("[FactoryCreateRule]{" + StringUtils.escapeString(digester.match) +
+                        "} New factory " + StringUtils.escapeString(realClassName));
             }
             Class<?> clazz = digester.getClassLoader().loadClass(realClassName);
             creationFactory = (ObjectCreationFactory)

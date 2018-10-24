@@ -21,6 +21,8 @@ import java.io.InputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
+import org.apache.commons.digester.StringUtils;
 import org.xml.sax.InputSource;
 
 import org.apache.commons.digester.Digester;
@@ -76,7 +78,7 @@ public class LoaderFromStream extends RuleLoader {
         if (debug) {
             log.debug(
                 "LoaderFromStream: loading rules for plugin at path [" 
-                + path + "]");
+                + StringUtils.escapeString(path) + "]");
         }
 
         // Note that this input-source doesn't have any idea of its

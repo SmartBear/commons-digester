@@ -18,6 +18,7 @@
 package org.apache.commons.digester.plugins.strategies;
 
 import org.apache.commons.digester.Digester;
+import org.apache.commons.digester.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.digester.plugins.RuleLoader;
 
@@ -45,7 +46,7 @@ public class LoaderSetProperties extends RuleLoader {
         if (debug) {
             log.debug(
                 "LoaderSetProperties loading rules for plugin at path [" 
-                + path + "]");
+                + StringUtils.escapeString(path) + "]");
         }
 
         digester.addSetProperties(path);

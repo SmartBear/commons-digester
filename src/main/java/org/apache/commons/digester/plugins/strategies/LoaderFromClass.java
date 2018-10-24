@@ -21,6 +21,7 @@ import java.lang.reflect.Method;
 
 import org.apache.commons.digester.Digester;
 import org.apache.commons.beanutils.MethodUtils;
+import org.apache.commons.digester.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.digester.plugins.RuleLoader;
 import org.apache.commons.digester.plugins.PluginException;
@@ -70,7 +71,7 @@ public class LoaderFromClass extends RuleLoader {
         if (debug) {
             log.debug(
                 "LoaderFromClass loading rules for plugin at path [" 
-                + path + "]");
+                + StringUtils.escapeString(path) + "]");
         }
 
         try {

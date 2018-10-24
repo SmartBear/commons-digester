@@ -25,6 +25,7 @@ import java.util.Iterator;
 
 import org.apache.commons.digester.Digester;
 
+import org.apache.commons.digester.StringUtils;
 import org.apache.commons.logging.Log;
 
 /**
@@ -99,7 +100,7 @@ public class PluginManager {
             declarationsById.put(id, decl);
             if (debug) {
                 log.debug(
-                    "Indexing plugin-id [" + id + "]" +
+                    "Indexing plugin-id [" + StringUtils.escapeString(id) + "]" +
                     " -> class [" + pluginClass.getName() + "]");
             }
         }

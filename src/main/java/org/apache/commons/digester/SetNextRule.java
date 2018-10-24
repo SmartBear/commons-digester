@@ -191,13 +191,15 @@ public class SetNextRule extends Rule {
         Object parent = digester.peek(1);
         if (digester.log.isDebugEnabled()) {
             if (parent == null) {
-                digester.log.debug("[SetNextRule]{" + digester.match +
+                digester.log.debug("[SetNextRule]{" + StringUtils.escapeString(digester.match) +
                         "} Call [NULL PARENT]." +
-                        methodName + "(" + child + ")");
+                        StringUtils.escapeString(methodName) + "(" +
+                        StringUtils.escapeString(child.toString()) + ")");
             } else {
-                digester.log.debug("[SetNextRule]{" + digester.match +
+                digester.log.debug("[SetNextRule]{" + StringUtils.escapeString(digester.match) +
                         "} Call " + parent.getClass().getName() + "." +
-                        methodName + "(" + child + ")");
+                        StringUtils.escapeString(methodName) + "(" +
+                        StringUtils.escapeString(child.toString()) + ")");
             }
         }
 
