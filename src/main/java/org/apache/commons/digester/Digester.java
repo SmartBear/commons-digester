@@ -1214,7 +1214,8 @@ public class Digester extends DefaultHandler {
         }
 
         if (saxLog.isDebugEnabled()) {
-            saxLog.debug("characters(" + new String(buffer, start, length) + ")");
+            saxLog.debug("characters(" +
+                    StringUtils.escapeString(new String(buffer, start, length)) + ")");
         }
 
         bodyText.append(buffer, start, length);
@@ -1284,11 +1285,12 @@ public class Digester extends DefaultHandler {
 
         if (debug) {
             if (saxLog.isDebugEnabled()) {
-                saxLog.debug("endElement(" + namespaceURI + "," + localName +
-                        "," + qName + ")");
+                saxLog.debug("endElement(" + StringUtils.escapeString(namespaceURI) + "," +
+                        StringUtils.escapeString(localName) + "," +
+                        StringUtils.escapeString(qName) + ")");
             }
-            log.debug("  match='" + match + "'");
-            log.debug("  bodyText='" + bodyText + "'");
+            log.debug("  match='" + StringUtils.escapeString(match) + "'");
+            log.debug("  bodyText='" + StringUtils.escapeString(bodyText.toString()) + "'");
         }
 
         // the actual element name is either in localName or qName, depending 
@@ -1310,7 +1312,7 @@ public class Digester extends DefaultHandler {
                 try {
                     Rule rule = rules.get(i);
                     if (debug) {
-                        log.debug("  Fire body() for " + rule);
+                        log.debug("  Fire body() for " + StringUtils.escapeString(rule.toString()));
                     }
                     rule.body(namespaceURI, name, bodyText);
                 } catch (Exception e) {
@@ -1323,14 +1325,14 @@ public class Digester extends DefaultHandler {
             }
         } else {
             if (debug) {
-                log.debug("  No rules found matching '" + match + "'.");
+                log.debug("  No rules found matching '" + StringUtils.escapeString(match) + "'.");
             }
         }
 
         // Recover the body text from the surrounding element
         bodyText = bodyTexts.pop();
         if (debug) {
-            log.debug("  Popping body text '" + bodyText.toString() + "'");
+            log.debug("  Popping body text '" + StringUtils.escapeString(bodyText.toString()) + "'");
         }
 
         // Fire "end" events for all relevant rules in reverse order
@@ -1340,7 +1342,7 @@ public class Digester extends DefaultHandler {
                 try {
                     Rule rule = rules.get(j);
                     if (debug) {
-                        log.debug("  Fire end() for " + rule);
+                        log.debug("  Fire end() for " + StringUtils.escapeString(rule.toString()));
                     }
                     rule.end(namespaceURI, name);
                 } catch (Exception e) {
@@ -1375,7 +1377,7 @@ public class Digester extends DefaultHandler {
     public void endPrefixMapping(String prefix) throws SAXException {
 
         if (saxLog.isDebugEnabled()) {
-            saxLog.debug("endPrefixMapping(" + prefix + ")");
+            saxLog.debug("endPrefixMapping(" + StringUtils.escapeString(prefix) + ")");
         }
 
         // Deregister this prefix mapping
@@ -1410,7 +1412,7 @@ public class Digester extends DefaultHandler {
 
         if (saxLog.isDebugEnabled()) {
             saxLog.debug("ignorableWhitespace(" +
-                    new String(buffer, start, len) + ")");
+                    StringUtils.escapeString(new String(buffer, start, len)) + ")");
         }
 
         // No processing required
@@ -1437,7 +1439,8 @@ public class Digester extends DefaultHandler {
         }
 
         if (saxLog.isDebugEnabled()) {
-            saxLog.debug("processingInstruction('" + target + "','" + data + "')");
+            saxLog.debug("processingInstruction('" + StringUtils.escapeString(target) +
+                    "','" + StringUtils.escapeString(data) + "')");
         }
 
         // No processing is required
@@ -1484,7 +1487,7 @@ public class Digester extends DefaultHandler {
     public void skippedEntity(String name) throws SAXException {
 
         if (saxLog.isDebugEnabled()) {
-            saxLog.debug("skippedEntity(" + name + ")");
+            saxLog.debug("skippedEntity(" + StringUtils.escapeString(name) + ")");
         }
 
         // No processing required
@@ -1537,14 +1540,15 @@ public class Digester extends DefaultHandler {
         }
 
         if (saxLog.isDebugEnabled()) {
-            saxLog.debug("startElement(" + namespaceURI + "," + localName + "," +
-                    qName + ")");
+            saxLog.debug("startElement(" + StringUtils.escapeString(namespaceURI) + "," +
+                    StringUtils.escapeString(localName) + "," + StringUtils.escapeString(qName) +
+                    ")");
         }
         
         // Save the body text accumulated for our surrounding element
         bodyTexts.push(bodyText);
         if (debug) {
-            log.debug("  Pushing body text '" + bodyText.toString() + "'");
+            log.debug("  Pushing body text '" + StringUtils.escapeString(bodyText.toString()) + "'");
         }
         bodyText = new StringBuffer();
 
@@ -1563,7 +1567,7 @@ public class Digester extends DefaultHandler {
         sb.append(name);
         match = sb.toString();
         if (debug) {
-            log.debug("  New match='" + match + "'");
+            log.debug("  New match='" + StringUtils.escapeString(match) + "'");
         }
 
         // Fire "begin" events for all relevant rules
@@ -1578,7 +1582,7 @@ public class Digester extends DefaultHandler {
                 try {
                     Rule rule = rules.get(i);
                     if (debug) {
-                        log.debug("  Fire begin() for " + rule);
+                        log.debug("  Fire begin() for " + StringUtils.escapeString(rule.toString()));
                     }
                     rule.begin(namespaceURI, name, list);
                 } catch (Exception e) {
@@ -1591,7 +1595,7 @@ public class Digester extends DefaultHandler {
             }
         } else {
             if (debug) {
-                log.debug("  No rules found matching '" + match + "'.");
+                log.debug("  No rules found matching '" + StringUtils.escapeString(match) + "'.");
             }
         }
 
@@ -1611,7 +1615,8 @@ public class Digester extends DefaultHandler {
             throws SAXException {
 
         if (saxLog.isDebugEnabled()) {
-            saxLog.debug("startPrefixMapping(" + prefix + "," + namespaceURI + ")");
+            saxLog.debug("startPrefixMapping(" + StringUtils.escapeString(prefix) + "," +
+                    StringUtils.escapeString(namespaceURI) + ")");
         }
 
         // Register this prefix mapping
@@ -1639,8 +1644,9 @@ public class Digester extends DefaultHandler {
     public void notationDecl(String name, String publicId, String systemId) {
 
         if (saxLog.isDebugEnabled()) {
-            saxLog.debug("notationDecl(" + name + "," + publicId + "," +
-                    systemId + ")");
+            saxLog.debug("notationDecl(" + StringUtils.escapeString(name) + "," +
+                    StringUtils.escapeString(publicId) + "," +
+                    StringUtils.escapeString(systemId) + ")");
         }
 
     }
@@ -1659,8 +1665,10 @@ public class Digester extends DefaultHandler {
                                    String systemId, String notation) {
 
         if (saxLog.isDebugEnabled()) {
-            saxLog.debug("unparsedEntityDecl(" + name + "," + publicId + "," +
-                    systemId + "," + notation + ")");
+            saxLog.debug("unparsedEntityDecl(" + StringUtils.escapeString(name) + "," +
+                    StringUtils.escapeString(publicId) + "," +
+                    StringUtils.escapeString(systemId) + "," +
+                    StringUtils.escapeString(notation) + ")");
         }
 
     }

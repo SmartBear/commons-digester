@@ -138,8 +138,8 @@ public class BeanPropertySetterRule extends Rule {
 
         // log some debugging information
         if (digester.log.isDebugEnabled()) {
-            digester.log.debug("[BeanPropertySetterRule]{" +
-                    digester.match + "} Called with text '" + text + "'");
+            digester.log.debug("[BeanPropertySetterRule]{" + StringUtils.escapeString(digester.match) +
+                    "} Called with text '" + StringUtils.escapeString(text) + "'");
         }
 
         bodyText = text.trim();
@@ -175,9 +175,11 @@ public class BeanPropertySetterRule extends Rule {
 
         // log some debugging information
         if (digester.log.isDebugEnabled()) {
-            digester.log.debug("[BeanPropertySetterRule]{" + digester.match +
+            digester.log.debug("[BeanPropertySetterRule]{" +
+                    StringUtils.escapeString(digester.match) +
                     "} Set " + top.getClass().getName() + " property " +
-                               property + " with text " + bodyText);
+                    StringUtils.escapeString(property) + " with text " +
+                    StringUtils.escapeString(bodyText));
         }
 
         // Force an exception if the property does not exist

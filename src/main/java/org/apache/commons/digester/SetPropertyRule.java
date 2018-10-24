@@ -130,9 +130,10 @@ public class SetPropertyRule extends Rule {
 
         // Log some debugging information
         if (digester.log.isDebugEnabled()) {
-            digester.log.debug("[SetPropertyRule]{" + digester.match +
+            digester.log.debug("[SetPropertyRule]{" + StringUtils.escapeString(digester.match) +
                     "} Set " + top.getClass().getName() + " property " +
-                    actualName + " to " + actualValue);
+                    StringUtils.escapeString(actualName) + " to " +
+                    StringUtils.escapeString(actualValue));
         }
 
         // Force an exception if the property does not exist

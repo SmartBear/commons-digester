@@ -23,6 +23,7 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.Rule;
 import org.apache.commons.digester.Rules;
 import org.apache.commons.digester.RulesBase;
+import org.apache.commons.digester.StringUtils;
 import org.apache.commons.logging.Log;
 
 /**
@@ -273,8 +274,8 @@ public class PluginRules implements Rules {
         boolean debug = log.isDebugEnabled();
         
         if (debug) {
-            log.debug("add entry" + ": mapping pattern [" + pattern + "]" + 
-                  " to rule of type [" + rule.getClass().getName() + "]");
+            log.debug("add entry" + ": mapping pattern [" + StringUtils.escapeString(pattern) +
+                    "]" + " to rule of type [" + rule.getClass().getName() + "]");
         }
         
         // allow patterns with a leading slash character
@@ -297,8 +298,8 @@ public class PluginRules implements Rules {
                 "An attempt was made to add a rule with a pattern that"
                 + "is not at or below the mountpoint of the current"
                 + " PluginRules object."
-                + " Rule pattern: " + pattern
-                + ", mountpoint: " + mountPoint
+                + " Rule pattern: " + StringUtils.escapeString(pattern)
+                + ", mountpoint: " + StringUtils.escapeString(mountPoint)
                 + ", rule type: " + rule.getClass().getName());
             return;
         }
@@ -323,7 +324,7 @@ public class PluginRules implements Rules {
         }
         
         if (debug) {
-            log.debug("add exit" + ": mapped pattern [" + pattern + "]" + 
+            log.debug("add exit" + ": mapped pattern [" + StringUtils.escapeString(pattern) + "]" +
                   " to rule of type [" + rule.getClass().getName() + "]");
         }
     }
@@ -368,8 +369,8 @@ public class PluginRules implements Rules {
         
         if (debug) {
             log.debug(
-                "Matching path [" + path +
-                "] on rules object " + this.toString());
+                "Matching path [" + StringUtils.escapeString(path) +
+                "] on rules object " + StringUtils.escapeString(this.toString()));
         }
 
         List<Rule> matches;
@@ -377,7 +378,7 @@ public class PluginRules implements Rules {
             (path.length() <= mountPoint.length())) {
             if (debug) {
                 log.debug(
-                    "Path [" + path + "] delegated to parent.");
+                    "Path [" + StringUtils.escapeString(path) + "] delegated to parent.");
             }
             
             matches = parent.match(namespaceURI, path);

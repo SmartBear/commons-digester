@@ -20,6 +20,7 @@ package org.apache.commons.digester.plugins;
 import java.util.List;
 
 import org.apache.commons.digester.Rule;
+import org.apache.commons.digester.StringUtils;
 import org.apache.commons.logging.Log;
 
 /**
@@ -158,7 +159,7 @@ public class PluginCreateRule extends Rule implements InitializableRule {
         boolean debug = log.isDebugEnabled();
         if (debug) {
             log.debug("PluginCreateRule.postRegisterInit" + 
-                      ": rule registered for pattern [" + matchPattern + "]");
+                      ": rule registered for pattern [" + StringUtils.escapeString(matchPattern) + "]");
         }
 
         if (digester == null) {
@@ -305,8 +306,8 @@ public class PluginCreateRule extends Rule implements InitializableRule {
         Log log = digester.getLogger();
         boolean debug = log.isDebugEnabled();
         if (debug) {
-            log.debug("PluginCreateRule.begin" + ": pattern=[" + pattern + "]" + 
-                  " match=[" + digester.getMatch() + "]");
+            log.debug("PluginCreateRule.begin" + ": pattern=[" + StringUtils.escapeString(pattern) +
+                    "]" + " match=[" + StringUtils.escapeString(digester.getMatch()) + "]");
         }
 
         if (initException != null) {
@@ -405,8 +406,8 @@ public class PluginCreateRule extends Rule implements InitializableRule {
         getDigester().push(instance);
         if (debug) {
             log.debug(
-                "PluginCreateRule.begin" + ": pattern=[" + pattern + "]" + 
-                " match=[" + digester.getMatch() + "]" + 
+                "PluginCreateRule.begin" + ": pattern=[" + StringUtils.escapeString(pattern) +
+                        "]" + " match=[" + StringUtils.escapeString(digester.getMatch()) + "]" +
                 " pushed instance of plugin [" + pluginClass.getName() + "]");
         }
         
@@ -510,7 +511,7 @@ public class PluginCreateRule extends Rule implements InitializableRule {
                 try {
                     Rule rule = rules.get(i);
                     if (debug) {
-                        log.debug("  Fire begin() for " + rule);
+                        log.debug("  Fire begin() for " + StringUtils.escapeString(rule.toString()));
                     }
                     rule.begin(namespace, name, list);
                 } catch (Exception e) {
@@ -539,7 +540,7 @@ public class PluginCreateRule extends Rule implements InitializableRule {
                 try {
                     Rule rule = rules.get(i);
                     if (debug) {
-                        log.debug("  Fire body() for " + rule);
+                        log.debug("  Fire body() for " + StringUtils.escapeString(rule.toString()));
                     }
                     rule.body(namespaceURI, name, text);
                 } catch (Exception e) {
@@ -570,7 +571,7 @@ public class PluginCreateRule extends Rule implements InitializableRule {
                 try {
                     Rule rule = rules.get(j);
                     if (debug) {
-                        log.debug("  Fire end() for " + rule);
+                        log.debug("  Fire end() for " + StringUtils.escapeString(rule.toString()));
                     }
                     rule.end(namespaceURI, name);
                 } catch (Exception e) {

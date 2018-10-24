@@ -411,20 +411,20 @@ public class SetNestedPropertiesRule extends Rule {
             boolean debug = log.isDebugEnabled();
 
             if (debug) {
-                log.debug("[SetNestedPropertiesRule]{" + digester.match +
-                        "} Setting property '" + propName + "' to '" +
-                        value + "'");
+                log.debug("[SetNestedPropertiesRule]{" + StringUtils.escapeString(digester.match) +
+                        "} Setting property '" + StringUtils.escapeString(propName) + "' to '" +
+                        StringUtils.escapeString(value) + "'");
             }
     
             // Populate the corresponding properties of the top object
             Object top = digester.peek();
             if (debug) {
                 if (top != null) {
-                    log.debug("[SetNestedPropertiesRule]{" + digester.match +
+                    log.debug("[SetNestedPropertiesRule]{" + StringUtils.escapeString(digester.match) +
                                        "} Set " + top.getClass().getName() +
                                        " properties");
                 } else {
-                    log.debug("[SetPropertiesRule]{" + digester.match +
+                    log.debug("[SetPropertiesRule]{" + StringUtils.escapeString(digester.match) +
                                        "} Set NULL properties");
                 }
             }
@@ -459,7 +459,9 @@ public class SetNestedPropertiesRule extends Rule {
             }
             catch(NullPointerException e) {
                 log.error("NullPointerException: "
-                 + "top=" + top + ",propName=" + propName + ",value=" + value + "!");
+                 + "top=" + StringUtils.escapeString(top != null ? top.toString() : "") +
+                        ",propName=" + StringUtils.escapeString(propName) + ",value=" +
+                        StringUtils.escapeString(value) + "!");
                  throw e;
             }
         }

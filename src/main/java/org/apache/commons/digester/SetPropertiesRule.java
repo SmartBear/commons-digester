@@ -203,9 +203,9 @@ public class SetPropertiesRule extends Rule {
             } 
             
             if (digester.log.isDebugEnabled()) {
-                digester.log.debug("[SetPropertiesRule]{" + digester.match +
-                        "} Setting property '" + name + "' to '" +
-                        value + "'");
+                digester.log.debug("[SetPropertiesRule]{" + StringUtils.escapeString(digester.match) +
+                        "} Setting property '" + StringUtils.escapeString(name) + "' to '" +
+                        StringUtils.escapeString(value) + "'");
             }
             
             if ((!ignoreMissingProperty) && (name != null)) {
@@ -243,11 +243,11 @@ public class SetPropertiesRule extends Rule {
         Object top = digester.peek();
         if (digester.log.isDebugEnabled()) {
             if (top != null) {
-                digester.log.debug("[SetPropertiesRule]{" + digester.match +
+                digester.log.debug("[SetPropertiesRule]{" + StringUtils.escapeString(digester.match) +
                                    "} Set " + top.getClass().getName() +
                                    " properties");
             } else {
-                digester.log.debug("[SetPropertiesRule]{" + digester.match +
+                digester.log.debug("[SetPropertiesRule]{" + StringUtils.escapeString(digester.match) +
                                    "} Set NULL properties");
             }
         }

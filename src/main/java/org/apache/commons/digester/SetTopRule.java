@@ -183,13 +183,15 @@ public class SetTopRule extends Rule {
         
         if (digester.log.isDebugEnabled()) {
             if (child == null) {
-                digester.log.debug("[SetTopRule]{" + digester.match +
+                digester.log.debug("[SetTopRule]{" + StringUtils.escapeString(digester.match) +
                         "} Call [NULL CHILD]." +
-                        methodName + "(" + parent + ")");
+                        StringUtils.escapeString(methodName) + "(" +
+                        StringUtils.escapeString(parent.toString()) + ")");
             } else {
-                digester.log.debug("[SetTopRule]{" + digester.match +
+                digester.log.debug("[SetTopRule]{" + StringUtils.escapeString(digester.match) +
                         "} Call " + child.getClass().getName() + "." +
-                        methodName + "(" + parent + ")");
+                        StringUtils.escapeString(methodName) + "(" +
+                        StringUtils.escapeString(parent.toString()) + ")");
             }
         }
 
